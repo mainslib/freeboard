@@ -545,6 +545,25 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		target.data('siblings-shown', !siblingsShown);
 	}
 
+	this.saveDashboardOnServer = function(_thisref, event)
+	{
+		var pretty = $(event.currentTarget).data('pretty');
+		var contentType = 'application/octet-stream';
+		var a = document.createElement('a');
+		if(pretty){
+			var blob = new Blob([JSON.stringify(self.serialize(), null, '\t')], {'type': contentType});
+		}else{
+			var blob = new Blob([JSON.stringify(self.serialize())], {'type': contentType});
+		}
+console.log('coucou',blob);
+		document.body.appendChild(a);
+		a.href = window.URL.createObjectURL(blob);
+		a.download = "dashboard.json";
+		a.target="_self";
+		a.click();
+	}
+
+
 	this.saveDashboard = function(_thisref, event)
 	{
 		var pretty = $(event.currentTarget).data('pretty');

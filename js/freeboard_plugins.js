@@ -1,3 +1,5 @@
+var old=0;
+
 DatasourceModel = function(theFreeboardModel, datasourcePlugins) {
 	var self = this;
 
@@ -545,9 +547,40 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		target.data('siblings-shown', !siblingsShown);
 	}
 
+	this.saveDashboardOnServer = function(_thisref, event)
+	{
+		var pretty = $(event.currentTarget).data('pretty');
+		var contentType = 'application/octet-stream';
+		var a = document.createElement('a');
+		if(pretty){
+			var blob = new Blob([JSON.stringify(self.serialize(), null, '\t')], {'type': contentType});
+		}else{
+			var blob = new Blob([JSON.stringify(self.serialize())], {'type': contentType});
+		}
+		document.body.appendChild(a);
+		a.href = window.URL.createObjectURL(blob);
+		a.download = "Adashboard.json";
+		a.target="_self";
+		a.click();
+	}
+
 	this.saveDashboard = function(_thisref, event)
 	{
 		var pretty = $(event.currentTarget).data('pretty');
+
+if(pretty == "server"){
+$.ajax({
+  type: "POST",
+  url: 'save.php',
+  data: JSON.stringify(self.serialize(), null, '\t'),
+  success: console.log,
+  dataType: 'json'
+});
+
+}else{
+
+
+
 		var contentType = 'application/octet-stream';
 		var a = document.createElement('a');
 		if(pretty){
@@ -560,6 +593,7 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		a.download = "dashboard.json";
 		a.target="_self";
 		a.click();
+}
 	}
 
 	this.addDatasource = function(datasource)
@@ -4084,6 +4118,17 @@ freeboard.loadDatasourcePlugin({
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (!_.isUndefined(gaugeObject)) {
+//console.log(gaugeObject);
+//SID
+if(gaugeObject.config.id == "gauge-1"){
+if(newValue != old && old != 0) {
+console.log('DIFERENT');
+var audio = new Audio('win.mp3');
+audio.play();
+}
+old=newValue;
+}
+console.log(gaugeObject.config.id,settingName,newValue);
                 gaugeObject.refresh(Number(newValue));
             }
         }

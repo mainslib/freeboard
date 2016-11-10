@@ -1,0 +1,297 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Last payement",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 20,
+				"5": 5
+			},
+			"col": {
+				"3": 3,
+				"4": 4,
+				"5": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"IGG\"][\"response\"][\"latest_contributions\"][0][\"by\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"IGG\"][\"response\"][\"latest_contributions\"][0][\"amount\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"IGG\"][\"response\"][\"latest_contributions\"][1][\"by\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"IGG\"][\"response\"][\"latest_contributions\"][1][\"amount\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"IGG\"][\"response\"][\"latest_contributions\"][2][\"by\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"IGG\"][\"response\"][\"latest_contributions\"][2][\"amount\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1,
+				"5": 10
+			},
+			"col": {
+				"3": 1,
+				"4": 1,
+				"5": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Youtube view",
+						"value": [
+							"parseInt(datasources[\"youtube\"][\"results\"][0])"
+						]
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"youtube\"][\"results\"][0]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 7,
+				"3": 1,
+				"4": 9,
+				"5": 18
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"4": 1,
+				"5": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "visiteurs",
+						"value": "datasources[\"piwik\"][0][\"visitors\"]",
+						"min_value": 0,
+						"max_value": "100"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"value": [
+							"datasources[\"piwik\"][0][\"visitors\"]"
+						]
+					}
+				}
+			]
+		},
+		{
+			"title": "Dernier commentaire",
+			"width": 1,
+			"row": {
+				"2": 15,
+				"3": 7,
+				"4": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 2,
+				"4": 2
+			},
+			"col_width": "2",
+			"widgets": [
+				{
+					"type": "html",
+					"settings": {
+						"html": "'<h1>'+datasources[\"IGG\"][\"response\"][\"latest_comments\"][0][\"text\"]+'</h1>'",
+						"height": 4
+					}
+				}
+			]
+		},
+		{
+			"title": "Fond collectes",
+			"width": 1,
+			"row": {
+				"2": 7,
+				"3": 9,
+				"4": 1,
+				"5": 1
+			},
+			"col": {
+				"2": 2,
+				"3": 1,
+				"4": 4,
+				"5": 1
+			},
+			"col_width": "1",
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "'$'+datasources[\"IGG\"][\"response\"][\"collected_funds\"] ",
+						"animate": true
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"value": [
+							"datasources[\"IGG\"][\"response\"][\"collected_funds\"]"
+						],
+						"include_legend": true,
+						"legend": "collected fund"
+					}
+				},
+				{
+					"type": "gauge",
+					"settings": {
+						"value": "datasources[\"IGG\"][\"response\"][\"collected_funds\"]",
+						"min_value": 0,
+						"max_value": "60000"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 25,
+				"3": 17,
+				"4": 16,
+				"5": 16
+			},
+			"col": {
+				"2": 2,
+				"3": 2,
+				"4": 4,
+				"5": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "heure",
+						"size": "regular",
+						"value": "datasources[\"HEURE\"][\"full_string_value\"]",
+						"animate": true
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "HEURE",
+			"type": "clock",
+			"settings": {
+				"refresh": 1
+			}
+		},
+		{
+			"name": "random",
+			"type": "JSON",
+			"settings": {
+				"url": "http://smiirl.souvenyr.com/json/?url=http://smiirl.souvenyr.com/random.php&sel=body",
+				"use_thingproxy": true,
+				"refresh": 5,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "IGG",
+			"type": "JSON",
+			"settings": {
+				"url": "https://api.indiegogo.com/1/campaigns/souvenyr-smartly-selects-the-best-photos-for-you.json?api_token=e377270bf1e9121da34cb6dff0e8af52a03296766a8e955c19f62f593651b346",
+				"use_thingproxy": true,
+				"refresh": 5,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "IGGleka",
+			"type": "JSON",
+			"settings": {
+				"url": "https://api.indiegogo.com/1/campaigns/leka-an-exceptional-toy-for-exceptional-children--2.json?api_token=e377270bf1e9121da34cb6dff0e8af52a03296766a8e955c19f62f593651b346",
+				"use_thingproxy": true,
+				"refresh": 120,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "piwik",
+			"type": "JSON",
+			"settings": {
+				"url": "https://piwik.souvenyr.com/index.php?module=API&method=Live.getCounters&idSite=3&lastMinutes=10&format=json&token_auth=b11c20d408e3e47b2558cd1063316f49",
+				"use_thingproxy": true,
+				"refresh": 5,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "youtube",
+			"type": "JSON",
+			"settings": {
+				"url": "http://board.souvenyr.com/json/?sel=.watch-view-count&url=https://www.youtube.com/watch?v=WPjIs1v9gc8",
+				"use_thingproxy": true,
+				"refresh": 5,
+				"method": "GET",
+				"name": "youtube"
+			}
+		}
+	],
+	"columns": 4
+}
